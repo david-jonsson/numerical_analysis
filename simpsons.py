@@ -9,8 +9,8 @@ def integrate(f, segments, b, a):
 
     for i in range(1, int(n) - 1):
         if i % 2:
-            sum += 4 * f((a + i) * h)
+            sum += 4 * f(i * h + a)
         else:
-            sum += 2 * f((a + i) * h)
+            sum += 2 * f(i * h + a)
 
     return (f(a) + sum + f(b)) * (h / 3)
