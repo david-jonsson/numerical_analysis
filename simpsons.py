@@ -12,13 +12,9 @@ def integrate(f):
     h           = (f[-1][0] - f[0][0]) / nr_segments
     sum         = 0
 
-    # print(nr_samples, nr_segments)
-    # print(f[-1], f[0])
-    # print(h)
     if nr_samples % 2 == 0:
         print("need odd number of samples")
         return
-
 
     for i in range(1, nr_segments):
         if i % 2:   sum += 4 * f[i][1]
