@@ -7,7 +7,14 @@ import math
 def f(x):
     return math.sin(21 * x) * math.e ** ((-0.3) * x) + x
 
-print(sim.integrate(f, 1000, math.pi, 0))
+samples = 1001
+p_i = np.zeros((samples, 2))
+for i in range(0, len(p_i)):
+    x      = i / (samples - 1) * math.pi
+    p_i[i] = (x, f(x))
+    print(p_i[i])
+    
+print(sim.integrate(p_i))
 
 p_f = np.array([[-3, 2], [-2.5, 1], [-2, 0.65], [0, 0.5], [2, 0.65], [2.5, 1], [3, 2]])
 p_g = np.array([[-3, 2], [-2.5, 1.5], [-2, 1.2], [0, 1], [2, 1.2], [2.5, 1.5], [3, 2]])
