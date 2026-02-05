@@ -22,7 +22,7 @@ def get_lagrange_p(step_size, points_x, points_y):
     :param points_y:    y coordinates
     """
     entries = int(math.fabs(points_x[-1] - points_x[0]) / step_size) + 1
-    f = np.zeros((int(entries),2))
+    f       = np.zeros((int(entries),2))
 
     for n in range(0, entries):
         lagrange_p  = 0
