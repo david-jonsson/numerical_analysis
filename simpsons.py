@@ -1,5 +1,3 @@
-import math
-
 def integrate(f):
     """
     Definite integral of f over a to b, using composite simpsons
