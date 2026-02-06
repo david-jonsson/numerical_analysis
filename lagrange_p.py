@@ -32,3 +32,26 @@ def get_lagrange_p(step_size, points_x, points_y):
         f[n] = (x, lagrange_p)
     
     return f
+
+# --- Lagrange functions ---
+def lagrange(x, x1, x2):
+    l1 = (x2 - x) / (x2 - x1)
+    l2 = (x - x1) / (x2 - x1)
+    return l1, l2
+
+# --- Piecewise linear interpolation function ---
+def func_pw_linear(x, x_nodes, y_nodes):
+    x = np.asarray(x)
+    x_nodes = np.asarray(x_nodes)
+    y_nodes = np.asarray(y_nodes)
+
+    y = np.zeros_like(x, dtype=float)
+
+    for i in range(len(x)):
+        for j in range(len(x_nodes) - 1):
+            if x_nodes[j] <= x[i] <= x_nodes[j + 1]:
+                l1, l2 = lagrange(x[i], x_nodes[j], x_nodes[j + 1])
+                y[i] = y_nodes[j] * l1 + y_nodes[j + 1] * l2
+
+    return y
+
