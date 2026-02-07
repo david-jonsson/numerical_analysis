@@ -14,8 +14,6 @@ def boat():
     [219.1,  42.1],
     [237.8,  60.1],
     [292.8,  60.5],
-    [297.3, 572.6],
-    [301.1, 572.6],
     [302.1,  60.4],
     [453.4,  61.2],
     [456.5,  48.7],
@@ -80,6 +78,14 @@ yc      = yc_num / yc_den
 
 print(yc)
 
+
+plt.plot(x, f, color='red', label='f')
+plt.plot(x, g, color='blue', label='g')
+plt.grid()
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.show()
 
 plt.plot(x, f, color='red', label='f')
 plt.plot(x, g, color='blue', label='g')

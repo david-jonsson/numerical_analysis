@@ -29,10 +29,9 @@ for i in nr_samples:
     stepsizes.append(stepsize)
     errors.append(check_error(i))
 
-plt.loglog(stepsizes, errors, color='red', label='delta error')
+plt.loglog(stepsizes, errors, color='red', label='error')
 plt.loglog(stepsizes, h4, color='blue', label='h4')
 plt.grid()
-plt.xlabel('x')
-plt.ylabel('y')
+plt.xlabel('h')
 plt.legend()
 plt.show()

@@ -33,6 +33,8 @@ yc_num  = sim.integrate(i_num)
 yc_den  = sim.integrate(i_den)
 yc      = yc_num / yc_den
 
+print(xc, yc)
+
 plt.plot(f[:,0], f[:,1], color='red', label='f')
 plt.plot(g[:,0], g[:,1], color='blue', label='g')
 plt.plot(xc, yc, 'o')
