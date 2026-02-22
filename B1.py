@@ -56,5 +56,5 @@ h_values = [1, 0.5, 0.25, 0.125]
 # runge_kutta.plot_solution(x1_d, 0, t_n, 0.1, x_solution)
 # runge_kutta.convergence_study(x1_d, 0, t_n, h_values, x_solution)
 
-runge_kutta.plot_solution(y1_d, 0, t_n, 1, y_solution)
+runge_kutta.plot_solution(y1_d, 0, t_n, h, y_solution)
 runge_kutta.convergence_study(y1_d, 0, t_n, h_values, y_solution)
