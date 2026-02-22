@@ -32,6 +32,7 @@ for i in nr_samples:
 plt.loglog(stepsizes, errors, color='red', label='error')
 plt.loglog(stepsizes, h4, color='blue', label='h4')
 plt.grid()
-plt.xlabel('h')
+plt.xlabel('ln(h)')
+plt.ylabel('ln(error)')
 plt.legend()
 plt.show()
