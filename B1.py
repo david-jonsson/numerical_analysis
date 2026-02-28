@@ -30,7 +30,7 @@ def x_solution(t):
     return fact_1 * fact_2
 
 
-def y1_d(t, x2):    
+def y1_d(t, y2):    
     return y2_vals[int(t / h)]
 
 def y2_d(t, y2):
