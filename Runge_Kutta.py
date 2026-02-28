@@ -1,11 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-h = 0.1
 
-k = 0.001
-a = 0.02
-g = 9.82
 
 angle = np.deg2rad(40)
 v_0 = 40
@@ -14,11 +10,21 @@ v_y = v_0 * np.sin(angle)
 
 
 def y_solution(t):
+
+    k = 0.001
+    a = 0.02
+    g = 9.82
+
     part_1 = (-v_y * k - g) * np.e ** (- k * t)
     part_2 = (-g * t + v_y) * k + g
     return  (1 / k ** 2) * (part_1 + part_2)
 
 def x_solution(t):
+
+    k = 0.001
+    a = 0.02
+    g = 9.82
+
     part_1 = (- v_x * k ** 2 - a - v_x) * np.e **((-k) * t) 
     part_2 = -np.cos(t) * a * k ** 2 - a * k * np.sin(t)
     part_3 = (k**2 + 1) * (a + v_x)
@@ -34,9 +40,13 @@ def x_solution(t):
 #------------------------------------------------------------
 def f(t, u):
     """Defines the Lorenz system of ODEs."""
+
+
     k = 0.001
     a = 0.02
     g = 9.82
+
+
     dudt = np.array([
         u[1],
         -k * u[1] + a * np.sin(t),
@@ -154,9 +164,8 @@ def convergence_study():
     a = 0
     b = 2 * np.pi
 
-    # h_values = [1, 0.5, 0.25, 0.125]
+    h_values = [1, 0.5, 0.25, 0.125]
 
-    h_values = [1, 0.5, 0.25]
     # h_values = [b/n for n in [5, 10, 20, 40, 80, 160, 320, 640]]
     errors_rk4 = []
 
@@ -170,15 +179,9 @@ def convergence_study():
         y_rk4 = np.array(y_rk4[:, [0, 2]])
                           
         y_exact = exact_solution(t_values)
-        errors_rk4.append(np.average(np.abs(y_rk4 - y_exact)))
+        errors_rk4.append(np.max(np.abs(y_rk4 - y_exact)))
         print(f"h={h:.2e}: RK4={errors_rk4[-1]:.2e}")
-        print("estimate:")
-        print(y_rk4)
-        print("exact:")
-        print(y_exact)
-        # print(y_rk4.shape)
-        # print(y_exact.shape)
-        # print(h, np.abs(y_rk4 - y_exact))
+ 
 
 
     plt.plot(t_values, y_exact, label='Exact Solution', color='black', linewidth=2)
