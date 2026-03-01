@@ -17,6 +17,8 @@ def runge_kutta_4(f, t0, y0, a, b, h):
         t0 += h
         t_values.append(t0)
         y_values.append(y0.copy())
+        if y0[2] < 0.05:
+            break
     
     return np.array(t_values), np.array(y_values)
 
@@ -37,7 +39,10 @@ def convergence_study(f, y00, a, b, h_values, exact_solution):
         y_exact = exact_solution(t_values)
         errors_rk4.append(np.max(np.abs(y_rk4 - y_exact)))
         print(f"h={h:.2e}: RK4={errors_rk4[-1]:.2e}")
- 
+        if len(errors_rk4) > 1:
+            print(errors_rk4[-2], errors_rk4[-1])
+            print(f"p={np.log(errors_rk4[-2] / errors_rk4[-1]) / np.log(2) }")
+
     plt.plot(t_values, y_rk4, label='RK4 Method', marker='^', markersize=3)
     plt.plot(t_values, y_exact, label='Exact Solution', linestyle='--')
     plt.xlabel('t')
@@ -48,6 +53,9 @@ def convergence_study(f, y00, a, b, h_values, exact_solution):
     plt.show()
                     
     plt.loglog(h_values, errors_rk4, marker='o', label='RK4 Error')
+    plt.loglog(h_values, [h**1 for h in h_values], linestyle='--', label='O(h^1)')
+    plt.loglog(h_values, [h**2 for h in h_values], linestyle='--', label='O(h^2)')
+    plt.loglog(h_values, [h**3 for h in h_values], linestyle='--', label='O(h^3)')
     plt.loglog(h_values, [h**4 for h in h_values], linestyle='--', label='O(h^4)')
     plt.xlabel('Step size h')
     plt.ylabel('Max Error')
@@ -55,3 +63,23 @@ def convergence_study(f, y00, a, b, h_values, exact_solution):
     plt.grid()
     plt.legend()
     plt.show()
+
+def plot(f, y00, a, b, h_values):
+
+    plt.figure()
+    for h in h_values:
+        t0 = a
+        y0 = y00.copy()
+
+        t_values, y_rk4 = runge_kutta_4(f, t0, y0, a, b, h)
+        y_rk4 = np.array(y_rk4[:, 2])
+                        
+        plt.plot(t_values, y_rk4, label=h, marker='^', markersize=3)
+
+    plt.xlabel('t')
+    plt.ylabel('y(t)')
+    plt.title(f'h={h}')
+    plt.legend()
+    plt.grid()
+    plt.show()
+                    
