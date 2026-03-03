@@ -15,7 +15,7 @@ def u(t, u):
     """Defines the Lorenz system of ODEs."""
     den     = np.e ** ( 1.0e-4 * u[2])
     k       = k0 / den
-    common  = -k * np.sqrt( (u[2] - w(t)) ** 2 + u[3] ** 2)
+    common  = -k * np.sqrt( (u[1] - w(t)) ** 2 + u[3] ** 2)
 
     dudt = np.array([
         u[1],
@@ -25,7 +25,7 @@ def u(t, u):
     ])
     return dudt
 
-def f(angle):
+def f(angle, plot=False, it=0):
     v_x = v_0 * np.cos(angle)
     v_y = v_0 * np.sin(angle)
 
@@ -33,7 +33,8 @@ def f(angle):
     t_values, u_values = rk.runge_kutta_4(u, 0, y0, 0, b, 1.5)
 
                     
-    plt.plot(u_values[:,0], u_values[:,2], label=np.mod(np.degrees(angle), 360), marker='^', markersize=3)
+    if plot:
+        plt.plot(u_values[:,0], u_values[:,2], label=f"it={it}, angle={np.mod(np.degrees(angle), 360)}", marker='^', markersize=3)
     return np.abs(u_values[-1][0] - 2700)
 
 
@@ -44,11 +45,13 @@ def f_prim(angle, delta):
 b = 100
 angle = np.deg2rad(45)
 delta = 1e-6
+it = 0
 
 plt.figure()
+
 while 1:
-    fn = f(angle)
-    # print(fn, angle)
+    it+=1
+    fn = f(angle, True, it)
 
     if fn < 10:
         print(np.mod(np.degrees(angle), 360))
@@ -57,7 +60,7 @@ while 1:
         angle = angle - fn / f_prim(angle, delta)
 
 
-plt.xlabel('t')
+plt.xlabel('x(t)')
 plt.ylabel('y(t)')
 plt.legend()
 plt.grid()

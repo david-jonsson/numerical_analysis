@@ -17,7 +17,7 @@ def f(t, u):
     """Defines the Lorenz system of ODEs."""
     den     = np.e ** ( 1.0e-4 * u[2])
     k       = k0 / den
-    common  = -k * np.sqrt( (u[2] - w(t)) ** 2 + u[3] ** 2)
+    common  = -k * np.sqrt( (u[1] - w(t)) ** 2 + u[3] ** 2)
 
     dudt = np.array([
         u[1],
@@ -29,7 +29,7 @@ def f(t, u):
 
 b = 100
 y0 = np.array([0, v_x, 0, v_y])
-h_values = [b / (2 ** (n)) for n in range(4, 19)]
+h_values = [b / (2 ** (n)) for n in range(4, 13)]
 
 rk.plot(f, y0, 0, b, h_values)
 

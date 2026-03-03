@@ -43,8 +43,10 @@ def convergence_study(f, y00, a, b, h_values, exact_solution):
             print(errors_rk4[-2], errors_rk4[-1])
             print(f"p={np.log(errors_rk4[-2] / errors_rk4[-1]) / np.log(2) }")
 
-    plt.plot(t_values, y_rk4, label='RK4 Method', marker='^', markersize=3)
-    plt.plot(t_values, y_exact, label='Exact Solution', linestyle='--')
+    plt.plot(t_values, y_rk4[:,0], color='black', linewidth=3, label='x(t)')
+    plt.plot(t_values, y_rk4[:,1], color='green', linewidth=3, label='y(t)')
+    plt.plot(t_values, y_exact[:,0], linewidth=3, color='yellow', label='Exact Solution x(t)', linestyle='--')
+    plt.plot(t_values, y_exact[:,1], linewidth=3, color='red', label='Exact Solution y(t)', linestyle='--')
     plt.xlabel('t')
     plt.ylabel('y(t)')
     plt.title(f'h={h}')
@@ -71,12 +73,10 @@ def plot(f, y00, a, b, h_values):
         t0 = a
         y0 = y00.copy()
 
-        t_values, y_rk4 = runge_kutta_4(f, t0, y0, a, b, h)
-        y_rk4 = np.array(y_rk4[:, 2])
-                        
-        plt.plot(t_values, y_rk4, label=h, marker='^', markersize=3)
+        t_values, u_values = runge_kutta_4(f, t0, y0, a, b, h)
+        plt.plot(u_values[:,0], u_values[:,2], label=h, marker='^', markersize=3)
 
-    plt.xlabel('t')
+    plt.xlabel('x(t)')
     plt.ylabel('y(t)')
     plt.title(f'h={h}')
     plt.legend()

@@ -41,5 +41,5 @@ def exact_solution(t):
 y0 = np.array([0, v_x, 0, v_y])
 h_values = [1, 0.5, 0.25, 0.125]
 
-rk.convergence_study(f, y0, 0, 2 * np.pi, h_values, exact_solution)
+rk.convergence_study(f, y0, 0, 4, h_values, exact_solution)
 
