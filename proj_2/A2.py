@@ -29,7 +29,7 @@ def f(t, u):
 
 b = 100
 y0 = np.array([0, v_x, 0, v_y])
-h_values = [b / (2 ** (n)) for n in range(4, 13)]
+h_values = [b / (2 ** (n)) for n in range(4, 8)]
 
 rk.plot(f, y0, 0, b, h_values)
 
