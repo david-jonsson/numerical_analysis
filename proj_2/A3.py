@@ -46,6 +46,8 @@ b = 100
 angle = np.deg2rad(45)
 delta = 1e-6
 it = 0
+old_fn = None
+tolerance = 0.005
 
 plt.figure()
 
@@ -53,16 +55,18 @@ while 1:
     it+=1
     fn = f(angle, True, it)
 
-    if fn < 10:
+    if old_fn and np.abs(old_fn - fn) < tolerance:
         print(np.mod(np.degrees(angle), 360))
+        print(fn)   
         break; 
-    else:
-        angle = angle - fn / f_prim(angle, delta)
-
+    
+    old_fn = fn
+    angle = angle - fn / f_prim(angle, delta)
 
 plt.xlabel('x(t)')
 plt.ylabel('y(t)')
 plt.legend()
+plt.title("Plot of each iteration of Newton's method")
 plt.grid()
 plt.show()
 
