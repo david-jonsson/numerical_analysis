@@ -46,8 +46,7 @@ b = 100
 angle = np.deg2rad(45)
 delta = 1e-6
 it = 0
-old_fn = None
-tolerance = 0.005
+tolerance = 0.1
 
 plt.figure()
 
@@ -55,7 +54,7 @@ while 1:
     it+=1
     fn = f(angle, True, it)
 
-    if old_fn and np.abs(old_fn - fn) < tolerance:
+    if  np.abs(fn) < tolerance:
         print(np.mod(np.degrees(angle), 360))
         print(fn)   
         break; 
